@@ -25,7 +25,7 @@ module.exports.handleUser = function (nickname, roomArray, session) {
         session.playerName = nickname;
         session.playerID = room.players.length - 1;
         console.log("dodano");
-      } else if (room.players.length == 4 && i == roomArray.length - 1) {
+      } else if (room.players.length == 4 || room.gameRunning == true && i == roomArray.length - 1) {
         let newRoom = new gameRoom(roomArray, 300);
         newRoom.addPlayer({ name: nickname, id: 0, ready: false });
         roomArray.push(newRoom);
