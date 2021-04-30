@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const path = require("path");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const newUser = require("./components/newUser.js").newUser;
 const handleUser = require("./components/newUser.js").handleUser;
