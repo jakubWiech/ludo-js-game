@@ -1,0 +1,45 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#full{
+    width: 100vw;
+    height: 100vh;
+    background-color: #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#joinPanel{
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+    background-color: #333333;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+#joinBt{
+    cursor: pointer;
+    background-color: #121212;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 1.5rem;
+}
+
+#nickname{
+    width: 80%;
+    height: 20%;
+    color: white;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid #121212;
+    font-size: 40px;
+}

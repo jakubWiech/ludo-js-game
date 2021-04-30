@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ludo - play with friends</title>
+  <script src="./scripts/room.js" defer></script>
+  <link rel="icon" href="./img/ludologo.png">
+  <link rel="stylesheet" href="./styles/room.css" />
+</head>
+
+<body>
+  <div id="loadingPlaceholder">
+    <p>Ładowanie...</p>
+  </div>
+  <div id="game">
+    <div id="board">
+      <img src="./img/ludologo.png" width="200">
+      <div id="mainboard">
+
+      </div>
+    </div>
+    <div id="userPanel">
+      <div id="topPanel">
+        <div id="steering">
+          <div class="label">
+            <p>Sterowanie</p>
+          </div>
+          <div id="funcBtns">
+            <div id="changeReadyButton" onclick="changeReadyState()">
+              Gotowy
+            </div>
+            <div id="quitButton" onclick="quitGame()">
+              Opuść grę
+            </div>
+          </div>
+        </div>
+        <div id="gamers">
+          <div class="label">
+            <p>Gracze</p>
+          </div>
+          <div id="lobby">
+
+          </div>
+        </div>
+      </div>
+      <div id="middlePanel">
+        <div id="queue" class="comment">
+          <p>Kolej gracza:</p>
+          <p id="currentPlayer"></p>
+        </div>
+        <div id="timer" class="comment">
+          <p>Pozostały czas:</p>
+          <p id="runningTime"></p>
+        </div>
+      </div>
+      <div id="dice" class="comment" onclick="rollTheDice()">
+        Rzuć kostką!
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

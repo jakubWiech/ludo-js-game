@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial;
+}
+
+#loadingPlaceholder{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  z-index: 2;
+  background-color: #222222;
+  color: white;
+}
+
+.label{
+  padding: 10px;
+  color: white;
+  font-size: 2rem;
+}
+
+#topPanel{
+  display: flex;
+  flex-direction: row;
+}
+
+#board{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100vw - 950px)
+}
+
+#mainboard{
+  width: 700px;
+  height: 700px;
+  background-color: #444444;
+  border-radius: 10px;
+  position: relative;
+}
+
+#funcBtns{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#funcBtns > *{
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+#userPanel{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  float: right;
+  height: 100vh;
+  background-color: #DE782A;
+  box-shadow: 0px 0px 10px #000;
+}
+
+#game {
+  height: 100vh;
+  width: 100vw;
+  background-color: #222222;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#lobby{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#lobby > * {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.player {
+  height: 50px;
+  border-radius: 25px;
+  border: 2px solid white;
+  color: white;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.2rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+#quitButton {
+  height: 50px;
+  border-radius: 25px;
+  background: transparent;
+  border: 2px solid #54B4F5;
+  background-color: #54B4F511;
+  color: #54B4F5;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#changeReadyButton {
+  height: 50px;
+  border-radius: 25px;
+  background: transparent;
+  border: 2px solid #37DE53;
+  background-color: #37DE5311;
+  color: #37DE53;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#steering, #gamers{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+#steering{
+  background-color: #1A1A1A;
+  width: 350px;
+}
+
+#gamers{
+  background-color: #151515;
+  width: 600px;
+}
+
+#middlePanel{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  background-color: #A3581F;
+  height: 200px;
+}
+
+#queue{
+  background-color: #BF6724;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+#timer{
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+#dice{
+  width: 200px;
+  height: 200px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 2px solid #FFFFFF;
+  background-color: #222222;
+  box-shadow: 0px 0px 10px #000;
+  border-radius: 10px;
+  text-align: center;
+  color: #FFFFFF;
+  line-height: 200px;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.comment{
+  color: #222222;
+  font-size: 2rem;
+  padding: 10px;
+}
+
+@media (max-width: 1750px){
+  #game{
+    flex-direction: column;
+    align-items: center;
+    height: 200vh;
+  }
+
+  #board{
+    margin-bottom: 50px;
+  }
+}
+
+.shadow{
+  box-shadow: 0px 0px 5px #000;
+}
