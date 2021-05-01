@@ -225,7 +225,6 @@ setInterval(function () {
     .then((res) => res.json())
     .then((res) => {
       document.getElementById("loadingPlaceholder").setAttribute("style", "display: none;")
-      console.log(res.room.players)
       for (let i = 0; i < 4; i++) {
         if (res.room.players[i] != undefined) {
           players[i].changePlayerName(res.room.players[i].name);
@@ -248,7 +247,6 @@ setInterval(function () {
       })
       if (res.room.gameStatus) {
         mycolor = res.myColor
-        console.log(mycolor)
         if (document.getElementById("changeReadyButton")) {
           document.getElementById("changeReadyButton").remove()
         }

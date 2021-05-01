@@ -36,5 +36,4 @@ module.exports.handleUser = function (nickname, roomArray, session) {
       }
     });
   }
-  console.log(roomArray);
 };

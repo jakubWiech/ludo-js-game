@@ -23,7 +23,6 @@ class gameRoom {
     checkRoom = function () {
         if (this.roomExpires > 0) {
             this.roomExpires--
-            console.log(this.roomExpires)
         } else {
             this.destroyRoom(this.allRooms)
             clearInterval(this.expirement)

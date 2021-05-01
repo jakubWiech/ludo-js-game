@@ -90,7 +90,6 @@ app.post("/updatePawns", function (req, res) {
         target.pawns.blue[req.body.id] = req.body.value
         break
     }
-    console.log(target.pawns)
     target.skipRound()
   } else {
     res.end()
@@ -100,7 +99,6 @@ app.post("/updatePawns", function (req, res) {
 app.get("/destroySession", function (req, res) {
   quitGame(roomArray, req.session);
   req.session.destroy();
-  console.log(roomArray);
 
   res.end()
 });
