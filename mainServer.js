@@ -73,6 +73,30 @@ app.post("/connectToGame", function (req, res) {
   res.end()
 });
 
+app.post("/updatePawns", function (req, res) {
+  if (req.session.movable) {
+    let target = roomArray.find(room => room.id == req.session.roomID)
+    switch (req.body.color) {
+      case "red":
+        target.pawns.red[req.body.id] = req.body.value
+        break
+      case "yellow":
+        target.pawns.yellow[req.body.id] = req.body.value
+        break
+      case "green":
+        target.pawns.green[req.body.id] = req.body.value
+        break
+      case "blue":
+        target.pawns.blue[req.body.id] = req.body.value
+        break
+    }
+    console.log(target.pawns)
+    target.skipRound()
+  } else {
+    res.end()
+  }
+})
+
 app.get("/destroySession", function (req, res) {
   quitGame(roomArray, req.session);
   req.session.destroy();
@@ -93,12 +117,16 @@ app.get("/findRoom", function (req, res) {
 app.get("/rollTheDice", function (req, res) {
   if (req.session.movable) {
     let randomNumber = { num: Math.floor(Math.random() * 6) + 1 }
-    let target = roomArray.find(room => room.id == req.session.roomID)
-    target.skipRound()
     res.end(JSON.stringify(randomNumber))
   } else {
     res.end()
   }
+})
+
+app.get("/skipround", function (req, res) {
+  let target = roomArray.find(room => room.id == req.session.roomID)
+  target.skipRound()
+  res.end()
 })
 
 app.listen(port, function () {

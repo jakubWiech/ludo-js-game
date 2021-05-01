@@ -75,6 +75,9 @@ const fieldsProps = [
 
 var canimove = false
 var moveDist = 0
+var mycolor = ""
+var pawnsLayed = false
+var allInDock = true
 
 class player {
   constructor(e) {
@@ -122,10 +125,12 @@ class boardField {
     this.mainField.style.left = left + "px"
     this.mainField.style.borderRadius = "50%"
     this.mainField.setAttribute("class", "shadow")
+    this.clickable = false
     this.bg
     if (color) {
       if (type == "dock") {
         this.mainField.style.border = "2px solid " + color
+        this.bg = "transparent"
       } else {
         this.mainField.style.backgroundColor = color
         this.bg = color
@@ -135,11 +140,11 @@ class boardField {
       this.bg = "#aaaaaa"
     }
     this.fieldType = type
-    if (type == "field") {
+    if (type != "dock" && type != "finish") {
       this.redId = id;
-      this.yellowId = (id + 10) % 40
+      this.yellowId = (id + 30) % 40
       this.greenId = (id + 20) % 40
-      this.blueId = (id + 30) % 40
+      this.blueId = (id + 10) % 40
     }
     if (type == "dock" || type == "finish") {
       switch (color) {
@@ -163,9 +168,10 @@ class boardField {
 
   appendToArr = function () {
     fieldsArr.push(this)
+    this.mainField.setAttribute("idx", fieldsArr.indexOf(this))
   }
 
-  changeColor = function (color) {
+  changeColor = function (color, i) {
     switch (color) {
       case "red":
         this.mainField.style.backgroundColor = "#F5332B"
@@ -179,47 +185,33 @@ class boardField {
       case "blue":
         this.mainField.style.backgroundColor = "#54B4F5"
         break
-
     }
+    this.mainField.setAttribute("pawnID", i)
   }
 
-  addClic = function (f) {
-    this.mainField.setAttribute("onclick", "movePawn()")
+  restoreBg = function () {
+    this.mainField.style.backgroundColor = this.bg
+  }
+
+  addClic = function () {
+    this.mainField.addEventListener("click", startFromDock)
+    this.clickable = true
   }
 
   removeClic = function () {
     this.mainField.removeAttribute("onclick")
   }
-
-  // movePawn = function (f) {
-  //   // this.mainField.style.backgroundColor = this.bg
-  //   // let target
-  //   // switch (color) {
-  //   //   case "red":
-  //   //     target = fieldsArr.find(field => field.redId == field.redId + move)
-  //   //     target.changeColor("red")
-  //   //     break
-  //   //   case "yellow":
-  //   //     target = fieldsArr.find(field => field.yellowId == field.yellowId + move)
-  //   //     target.changeColor("yellow")
-  //   //     break
-  //   //   case "green":
-  //   //     target = fieldsArr.find(field => field.greenId == field.greenId + move)
-  //   //     target.changeColor("green")
-  //   //     break
-  //   //   case "blue":
-  //   //     target = fieldsArr.find(field => field.blueId == field.blueId + move)
-  //   //     target.changeColor("blue")
-  //   //     break
-  //   // }
-  //   console.log("klikłeś se")
-  //   this.removeClic()
-  // }
 }
 
 const fieldsArr = []
 const players = [];
 let state = false
+const colors = [
+  "#F5332B",
+  "#F5D547",
+  "#37DE53",
+  "#54B4F5"
+]
 
 for (let i = 0; i < 4; i++) {
   players[i] = new player(i);
@@ -237,63 +229,75 @@ setInterval(function () {
       for (let i = 0; i < 4; i++) {
         if (res.room.players[i] != undefined) {
           players[i].changePlayerName(res.room.players[i].name);
-          if (res.room.players[i].ready) {
-            players[i].changeColor("#37DE53");
+          if (!res.room.gameStatus) {
+            if (res.room.players[i].ready) {
+              players[i].changeColor("#37DE53");
+            } else {
+              players[i].changeColor("#F5332B");
+            }
           } else {
-            players[i].changeColor("#F5332B");
+            players[i].changeColor(colors[i])
           }
         } else {
           players[i].changePlayerName("Brak gracza");
           players[i].changeColor("#FFFFFF");
         }
       }
+      fieldsArr.forEach(field => {
+        field.restoreBg()
+      })
       if (res.room.gameStatus) {
-        res.room.pawns.red.forEach(pawn => {
+        mycolor = res.myColor
+        console.log(mycolor)
+        if (document.getElementById("changeReadyButton")) {
+          document.getElementById("changeReadyButton").remove()
+        }
+        res.room.pawns.red.forEach((pawn, i) => {
           let target = fieldsArr.find(field => field.redId == pawn)
-          target.changeColor("red")
-          if (res.myColor == "red") {
+          target.changeColor("red", i)
+          if (res.myColor == "red" && target.clickable == false) {
             target.addClic(res.room.pawns.red)
+            if (pawn >= 0) {
+              allInDock = false
+            }
           }
         })
-        res.room.pawns.yellow.forEach(pawn => {
+        res.room.pawns.yellow.forEach((pawn, i) => {
           let target = fieldsArr.find(field => field.yellowId == pawn)
-          target.changeColor("yellow")
-          if (res.myColor == "yellow") {
+          target.changeColor("yellow", i)
+          if (res.myColor == "yellow" && target.clickable == false) {
             target.addClic(res.room.pawns.yellow)
+            if (pawn >= 0) {
+              allInDock = false
+            }
           }
         })
-        res.room.pawns.green.forEach(pawn => {
+        res.room.pawns.green.forEach((pawn, i) => {
           let target = fieldsArr.find(field => field.greenId == pawn)
-          target.changeColor("green")
-          if (res.myColor == "green") {
+          target.changeColor("green", i)
+          if (res.myColor == "green" && target.clickable == false) {
             target.addClic(res.room.pawns.green)
+            if (pawn >= 0) {
+              allInDock = false
+            }
           }
         })
-        res.room.pawns.blue.forEach(pawn => {
+        res.room.pawns.blue.forEach((pawn, i) => {
           let target = fieldsArr.find(field => field.blueId == pawn)
-          target.changeColor("blue")
-          if (res.myColor == "blue") {
+          target.changeColor("blue", i)
+          if (res.myColor == "blue" && target.clickable == false) {
             target.addClic(res.room.pawns.blue)
+            if (pawn >= 0) {
+              allInDock = false
+            }
           }
         })
+        if (document.getElementById("currentPlayer").innerText != res.room.whosMove.name) {
+          document.getElementById("dice").setAttribute("onclick", "rollTheDice()")
+        }
         document.getElementById("currentPlayer").innerText = res.room.whosMove.name
         document.getElementById("runningTime").innerText = res.room.moveTime
       }
-
-      // if(res.myColor){
-      //   switch(res.myColor){
-      //     case "red":
-      //       res.room.pawns.red.forEach(pawn => {
-      //         let target = fieldsArr.find(field => field.redId == pawn)
-      //         target.addClic("red")
-      //       })
-      //     case "yellow":
-
-      //     case "green":
-
-      //     case "blue":
-      //   }
-      // }
 
       canimove = res.isItMyMove
       changeReadyButton(res.ready)
@@ -301,21 +305,23 @@ setInterval(function () {
 }, 1000);
 
 function changeReadyButton(scheme) {
-  let tgbt = document.getElementById("changeReadyButton")
-  if (scheme) {
-    tgbt.style.border =
-      "2px solid #F5332B";
-    tgbt.style.color = "#F5332B";
-    tgbt.style.backgroundColor = "#F5332B11"
-    tgbt.innerText =
-      "Nie jestem gotowy";
-  } else {
-    tgbt.style.border =
-      "2px solid #37DE53";
-    tgbt.style.color = "#37DE53";
-    tgbt.style.backgroundColor = "#37DE5311"
-    tgbt.innerText =
-      "Jestem gotowy";
+  if (document.getElementById("changeReadyButton")) {
+    let tgbt = document.getElementById("changeReadyButton")
+    if (scheme) {
+      tgbt.style.border =
+        "2px solid #F5332B";
+      tgbt.style.color = "#F5332B";
+      tgbt.style.backgroundColor = "#F5332B11"
+      tgbt.innerText =
+        "Nie jestem gotowy";
+    } else {
+      tgbt.style.border =
+        "2px solid #37DE53";
+      tgbt.style.color = "#37DE53";
+      tgbt.style.backgroundColor = "#37DE5311"
+      tgbt.innerText =
+        "Jestem gotowy";
+    }
   }
 }
 
@@ -341,14 +347,94 @@ function rollTheDice() {
     fetch("/rollTheDice", {
       method: "GET"
     }).then(res => res.json()).then(res => {
+      document.getElementById("dice").removeAttribute("onclick")
       if (res.num) {
-        console.log(res.num)
         moveDist = res.num
+        document.getElementById("diceValue").src = "./img/dice/dice" + res.num + ".png"
+        let voices = [new SpeechSynthesisUtterance("jeden"), new SpeechSynthesisUtterance("dwa"), new SpeechSynthesisUtterance("trzy"), new SpeechSynthesisUtterance("cztery"), new SpeechSynthesisUtterance("pięć"), new SpeechSynthesisUtterance("sześć")]
+        speechSynthesis.speak(voices[res.num - 1])
+        if (allInDock) {
+          if (res.num != 1 && res.num != 6) {
+            fetch("/skipround", {
+              method: "GET"
+            })
+          }
+        }
       }
     })
   }
 }
 
+function startFromDock() {
+  if (moveDist == 1 || moveDist == 6) {
+    this.removeEventListener("click", startFromDock)
+    let target
+    switch (mycolor) {
+      case "red":
+        target = fieldsArr.find(field => field.redId == 0)
+        target.changeColor("red")
+        break
+      case "yellow":
+        target = fieldsArr.find(field => field.yellowId == 0)
+        target.changeColor("yellow")
+        break
+      case "green":
+        target = fieldsArr.find(field => field.greenId == 0)
+        target.changeColor("green")
+        break
+      case "blue":
+        target = fieldsArr.find(field => field.blueId == 0)
+        target.changeColor("blue")
+        break
+    }
+    fieldsArr[parseInt(this.getAttribute("idx"))].restoreBg()
+    target.mainField.addEventListener("click", movePawn)
+
+    fetch("/updatePawns", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ color: mycolor, id: parseInt(this.getAttribute("pawnID")), value: 0 })
+    }).then(console.log("Poszło"))
+  }
+}
+
 function movePawn() {
-  console.log("click")
+  this.removeEventListener("click", movePawn)
+  let obj = fieldsArr[parseInt(this.getAttribute("idx"))]
+  let target
+  let v
+  switch (mycolor) {
+    case "red":
+      target = fieldsArr.find(field => field.redId == obj.redId + moveDist)
+      v = obj.redId + moveDist
+      target.changeColor("red")
+      break
+    case "yellow":
+      target = fieldsArr.find(field => field.yellowId == obj.yellowId + moveDist)
+      v = obj.yellowId + moveDist
+      target.changeColor("yellow")
+      break
+    case "green":
+      target = fieldsArr.find(field => field.greenId == obj.greenId + moveDist)
+      v = obj.greenId + moveDist
+      target.changeColor("green")
+      break
+    case "blue":
+      target = fieldsArr.find(field => field.blueId == obj.blueId + moveDist)
+      v = obj.blueId + moveDist
+      target.changeColor("blue")
+      break
+  }
+  fieldsArr[parseInt(this.getAttribute("idx"))].restoreBg()
+  target.mainField.addEventListener("click", movePawn)
+
+  fetch("/updatePawns", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ color: mycolor, id: parseInt(this.getAttribute("pawnID")), value: v })
+  }).then(console.log("Poszło"))
 }

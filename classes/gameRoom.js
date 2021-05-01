@@ -1,3 +1,4 @@
+const session = require('express-session')
 const uniqid = require('uniqid')
 class gameRoom {
     constructor(roomArray) {
