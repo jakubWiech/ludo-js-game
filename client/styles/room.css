@@ -4,7 +4,7 @@
   font-family: Arial;
 }
 
-#loadingPlaceholder{
+#loadingPlaceholder {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -17,25 +17,25 @@
   color: white;
 }
 
-.label{
+.label {
   padding: 10px;
   color: white;
   font-size: 2rem;
 }
 
-#topPanel{
+#topPanel {
   display: flex;
   flex-direction: row;
 }
 
-#board{
+#board {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(100vw - 950px)
+  width: calc(100vw - 950px);
 }
 
-#mainboard{
+#mainboard {
   width: 700px;
   height: 700px;
   background-color: #444444;
@@ -43,26 +43,26 @@
   position: relative;
 }
 
-#funcBtns{
+#funcBtns {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-#funcBtns > *{
+#funcBtns > * {
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 5px;
 }
 
-#userPanel{
+#userPanel {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   float: right;
   height: 100vh;
-  background-color: #DE782A;
+  background-color: #de782a;
   box-shadow: 0px 0px 10px #000;
 }
 
@@ -75,7 +75,7 @@
   justify-content: space-between;
 }
 
-#lobby{
+#lobby {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -99,19 +99,18 @@
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
-  -moz-user-select: none; 
+  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
 }
 
 #quitButton {
   height: 50px;
   border-radius: 25px;
   background: transparent;
-  border: 2px solid #54B4F5;
-  background-color: #54B4F511;
-  color: #54B4F5;
+  border: 2px solid #54b4f5;
+  background-color: #54b4f511;
+  color: #54b4f5;
   line-height: 50px;
   padding-left: 10px;
   padding-right: 10px;
@@ -123,9 +122,9 @@
   height: 50px;
   border-radius: 25px;
   background: transparent;
-  border: 2px solid #37DE53;
-  background-color: #37DE5311;
-  color: #37DE53;
+  border: 2px solid #37de53;
+  background-color: #37de5311;
+  color: #37de53;
   line-height: 50px;
   padding-left: 10px;
   padding-right: 10px;
@@ -133,7 +132,8 @@
   cursor: pointer;
 }
 
-#steering, #gamers{
+#steering,
+#gamers {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -141,27 +141,27 @@
   padding: 20px;
 }
 
-#steering{
-  background-color: #1A1A1A;
+#steering {
+  background-color: #1a1a1a;
   width: 350px;
 }
 
-#gamers{
+#gamers {
   background-color: #151515;
   width: 600px;
 }
 
-#middlePanel{
+#middlePanel {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   width: 100%;
-  background-color: #A3581F;
+  background-color: #a3581f;
   height: 200px;
 }
 
-#queue{
-  background-color: #BF6724;
+#queue {
+  background-color: #bf6724;
   width: 50%;
   display: flex;
   justify-content: space-around;
@@ -169,7 +169,7 @@
   flex-direction: column;
 }
 
-#timer{
+#timer {
   width: 50%;
   display: flex;
   justify-content: space-around;
@@ -177,45 +177,67 @@
   flex-direction: column;
 }
 
-#dice{
+#someoneWon {
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000066;
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerWin {
+  width: 50%;
+  height: 50%;
+  background-color: #181818;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#dice {
   width: 200px;
   height: 200px;
   margin-top: 30px;
   margin-bottom: 30px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   background-color: #222222;
   box-shadow: 0px 0px 10px #000;
   border-radius: 10px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 200px;
   cursor: pointer;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
-  -moz-user-select: none; 
+  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.comment{
+.comment {
   color: #222222;
   font-size: 2rem;
   padding: 10px;
 }
 
-@media (max-width: 1750px){
-  #game{
+@media (max-width: 1750px) {
+  #game {
     flex-direction: column;
     align-items: center;
     height: 200vh;
   }
 
-  #board{
+  #board {
     margin-bottom: 50px;
   }
 }
 
-.shadow{
+.shadow {
   box-shadow: 0px 0px 5px #000;
 }

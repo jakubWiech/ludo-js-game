@@ -1,60 +1,60 @@
 const fieldsProps = [
-  [265, 25, "safehouse", 0, "#F5332BAA"],
-  [265, 85, "field", 1],
-  [265, 145, "field", 2],
-  [265, 205, "field", 3],
-  [265, 265, "field", 4],
-  [205, 265, "field", 5],
-  [145, 265, "field", 6],
-  [85, 265, "field", 7],
-  [25, 265, "field", 8],
-  [25, 325, "field", 9],
-  [25, 385, "safehouse", 10, "#F5D547AA"],
-  [85, 385, "field", 11],
-  [145, 385, "field", 12],
-  [205, 385, "field", 13],
-  [265, 385, "field", 14],
-  [265, 445, "field", 15],
-  [265, 505, "field", 16],
-  [265, 565, "field", 17],
-  [265, 625, "field", 18],
-  [325, 625, "field", 19],
-  [385, 625, "safehouse", 20, "#37DE53AA"],
-  [385, 565, "field", 21],
-  [385, 505, "field", 22],
-  [385, 445, "field", 23],
-  [385, 385, "field", 24],
-  [445, 385, "field", 25],
-  [505, 385, "field", 26],
-  [565, 385, "field", 27],
-  [625, 385, "field", 28],
-  [625, 325, "field", 29],
-  [625, 265, "safehouse", 30, "#54B4F5AA"],
-  [565, 265, "field", 31],
-  [505, 265, "field", 32],
-  [445, 265, "field", 33],
-  [385, 265, "field", 34],
-  [385, 205, "field", 35],
-  [385, 145, "field", 36],
-  [385, 85, "field", 37],
-  [385, 25, "field", 38],
-  [325, 25, "field", 39],
-  [325, 85, "finish", 40, "#F5332BAA"],
-  [325, 145, "finish", 41, "#F5332BAA"],
-  [325, 205, "finish", 42, "#F5332BAA"],
-  [325, 265, "finish", 43, "#F5332BAA"],
-  [85, 325, "finish", 40, "#F5D547AA"],
-  [145, 325, "finish", 41, "#F5D547AA"],
-  [205, 325, "finish", 42, "#F5D547AA"],
-  [265, 325, "finish", 43, "#F5D547AA"],
-  [325, 385, "finish", 40, "#37DE53AA"],
-  [325, 445, "finish", 41, "#37DE53AA"],
-  [325, 505, "finish", 42, "#37DE53AA"],
-  [325, 565, "finish", 43, "#37DE53AA"],
-  [385, 325, "finish", 40, "#54B4F5AA"],
-  [445, 325, "finish", 41, "#54B4F5AA"],
-  [505, 325, "finish", 42, "#54B4F5AA"],
-  [565, 325, "finish", 43, "#54B4F5AA"],
+  [265, 25, "safehouse", [0, 30, 20, 10], "#F5332B66"],
+  [265, 85, "field", [1, 31, 21, 11]],
+  [265, 145, "field", [2, 32, 22, 12]],
+  [265, 205, "field", [3, 33, 23, 13]],
+  [265, 265, "field", [4, 34, 24, 14]],
+  [205, 265, "field", [5, 35, 25, 15]],
+  [145, 265, "field", [6, 36, 26, 16]],
+  [85, 265, "field", [7, 37, 27, 17]],
+  [25, 265, "field", [8, 38, 28, 18]],
+  [25, 325, "field", [9, 39, 29, 19]],
+  [25, 385, "safehouse", [10, 0, 30, 20], "#F5D54766"],
+  [85, 385, "field", [11, 1, 31, 21]],
+  [145, 385, "field", [12, 2, 32, 22]],
+  [205, 385, "field", [13, 3, 33, 23]],
+  [265, 385, "field", [14, 4, 34, 24]],
+  [265, 445, "field", [15, 5, 35, 25]],
+  [265, 505, "field", [16, 6, 36, 26]],
+  [265, 565, "field", [17, 7, 37, 27]],
+  [265, 625, "field", [18, 8, 38, 28]],
+  [325, 625, "field", [19, 9, 39, 29]],
+  [385, 625, "safehouse", [20, 10, 0, 30], "#37DE5366"],
+  [385, 565, "field", [21, 11, 1, 31]],
+  [385, 505, "field", [22, 12, 2, 32]],
+  [385, 445, "field", [23, 13, 3, 33]],
+  [385, 385, "field", [24, 14, 4, 34]],
+  [445, 385, "field", [25, 15, 5, 35]],
+  [505, 385, "field", [26, 16, 6, 36]],
+  [565, 385, "field", [27, 17, 7, 37]],
+  [625, 385, "field", [28, 18, 8, 38]],
+  [625, 325, "field", [29, 19, 9, 39]],
+  [625, 265, "safehouse", [30, 20, 10, 0], "#54B4F566"],
+  [565, 265, "field", [31, 21, 11, 1]],
+  [505, 265, "field", [32, 22, 12, 2]],
+  [445, 265, "field", [33, 23, 13, 3]],
+  [385, 265, "field", [34, 24, 14, 4]],
+  [385, 205, "field", [35, 25, 15, 5]],
+  [385, 145, "field", [36, 26, 16, 6]],
+  [385, 85, "field", [37, 27, 17, 7]],
+  [385, 25, "field", [38, 28, 18, 8]],
+  [325, 25, "field", [39, 29, 19, 9]],
+  [325, 85, "finish", 40, "#F5332B66"],
+  [325, 145, "finish", 41, "#F5332B66"],
+  [325, 205, "finish", 42, "#F5332B66"],
+  [325, 265, "finish", 43, "#F5332B66"],
+  [85, 325, "finish", 40, "#F5D54766"],
+  [145, 325, "finish", 41, "#F5D54766"],
+  [205, 325, "finish", 42, "#F5D54766"],
+  [265, 325, "finish", 43, "#F5D54766"],
+  [325, 385, "finish", 40, "#37DE5366"],
+  [325, 445, "finish", 41, "#37DE5366"],
+  [325, 505, "finish", 42, "#37DE5366"],
+  [325, 565, "finish", 43, "#37DE5366"],
+  [385, 325, "finish", 40, "#54B4F566"],
+  [445, 325, "finish", 41, "#54B4F566"],
+  [505, 325, "finish", 42, "#54B4F566"],
+  [565, 325, "finish", 43, "#54B4F566"],
   [25, 25, "dock", -1, "#F5332B"],
   [25, 85, "dock", -2, "#F5332B"],
   [85, 25, "dock", -3, "#F5332B"],
@@ -78,6 +78,8 @@ var moveDist = 0
 var mycolor = ""
 var pawnsLayed = false
 var allInDock = true
+
+//FIXME: Podziel klasy do osobnych plików
 
 class player {
   constructor(e) {
@@ -126,7 +128,12 @@ class boardField {
     this.mainField.style.borderRadius = "50%"
     this.mainField.setAttribute("class", "shadow")
     this.clickable = false
-    this.bg
+    if(typeof(id) == "object"){
+      this.redId = id[0]
+      this.yellowId = id[1]
+      this.greenId = id[2]
+      this.blueId = id[3]
+    }
     if (color) {
       if (type == "dock") {
         this.mainField.style.border = "2px solid " + color
@@ -140,24 +147,18 @@ class boardField {
       this.bg = "#aaaaaa"
     }
     this.fieldType = type
-    if (type != "dock" && type != "finish") {
-      this.redId = id;
-      this.yellowId = (id + 30) % 40
-      this.greenId = (id + 20) % 40
-      this.blueId = (id + 10) % 40
-    }
     if (type == "dock" || type == "finish") {
       switch (color) {
-        case "#F5332B":
+        case "#F5332B": case "#F5332B66":
           this.redId = id
           break
-        case "#F5D547":
+        case "#F5D547": case "#F5D54766":
           this.yellowId = id
           break
-        case "#37DE53":
+        case "#37DE53": case "#37DE5366":
           this.greenId = id
           break
-        case "#54B4F5":
+        case "#54B4F5": case "#54B4F566":
           this.blueId = id
           break
       }
@@ -168,10 +169,11 @@ class boardField {
 
   appendToArr = function () {
     fieldsArr.push(this)
+    console.log(this)
     this.mainField.setAttribute("idx", fieldsArr.indexOf(this))
   }
 
-  changeColor = function (color, i) {
+  changeColor = function (color) {
     switch (color) {
       case "red":
         this.mainField.style.backgroundColor = "#F5332B"
@@ -186,7 +188,7 @@ class boardField {
         this.mainField.style.backgroundColor = "#54B4F5"
         break
     }
-    this.mainField.setAttribute("pawnID", i)
+    //this.mainField.setAttribute("pawnID", i)
   }
 
   restoreBg = function () {
@@ -194,18 +196,20 @@ class boardField {
   }
 
   addClic = function () {
-    this.mainField.addEventListener("click", startFromDock)
+    this.mainField.addEventListener("click", movePawn)
     this.clickable = true
   }
 
   removeClic = function () {
-    this.mainField.removeAttribute("onclick")
+    this.mainField.removeEventListener("click", movePawn)
+    this.clickable = false
   }
 }
 
 const fieldsArr = []
 const players = [];
 let state = false
+const colorIndexes = ['red', 'yellow', 'green', 'blue']
 const colors = [
   "#F5332B",
   "#F5D547",
@@ -225,6 +229,9 @@ setInterval(function () {
     .then((res) => res.json())
     .then((res) => {
       document.getElementById("loadingPlaceholder").setAttribute("style", "display: none;")
+      if(res.winner != null){
+        console.log(res.winner)
+      }
       for (let i = 0; i < 4; i++) {
         if (res.room.players[i] != undefined) {
           players[i].changePlayerName(res.room.players[i].name);
@@ -242,56 +249,19 @@ setInterval(function () {
           players[i].changeColor("#FFFFFF");
         }
       }
-      fieldsArr.forEach(field => {
-        field.restoreBg()
-      })
+      
       if (res.room.gameStatus) {
         mycolor = res.myColor
         if (document.getElementById("changeReadyButton")) {
           document.getElementById("changeReadyButton").remove()
         }
-        res.room.pawns.red.forEach((pawn, i) => {
-          let target = fieldsArr.find(field => field.redId == pawn)
-          target.changeColor("red", i)
-          if (res.myColor == "red" && target.clickable == false) {
-            target.addClic(res.room.pawns.red)
-            if (pawn >= 0) {
-              allInDock = false
-            }
-          }
-        })
-        res.room.pawns.yellow.forEach((pawn, i) => {
-          let target = fieldsArr.find(field => field.yellowId == pawn)
-          target.changeColor("yellow", i)
-          if (res.myColor == "yellow" && target.clickable == false) {
-            target.addClic(res.room.pawns.yellow)
-            if (pawn >= 0) {
-              allInDock = false
-            }
-          }
-        })
-        res.room.pawns.green.forEach((pawn, i) => {
-          let target = fieldsArr.find(field => field.greenId == pawn)
-          target.changeColor("green", i)
-          if (res.myColor == "green" && target.clickable == false) {
-            target.addClic(res.room.pawns.green)
-            if (pawn >= 0) {
-              allInDock = false
-            }
-          }
-        })
-        res.room.pawns.blue.forEach((pawn, i) => {
-          let target = fieldsArr.find(field => field.blueId == pawn)
-          target.changeColor("blue", i)
-          if (res.myColor == "blue" && target.clickable == false) {
-            target.addClic(res.room.pawns.blue)
-            if (pawn >= 0) {
-              allInDock = false
-            }
-          }
-        })
-        if (document.getElementById("currentPlayer").innerText != res.room.whosMove.name) {
+        
+        updateBoard(res.room)
+
+        if (res.isItMyMove) {
           document.getElementById("dice").setAttribute("onclick", "rollTheDice()")
+        } else {
+          document.getElementById("dice").removeAttribute("onclick")
         }
         document.getElementById("currentPlayer").innerText = res.room.whosMove.name
         document.getElementById("runningTime").innerText = res.room.moveTime
@@ -336,31 +306,55 @@ function quitGame() {
   }).then(console.log("opuściłeś grę")).then(res => location.href = "/game")
 }
 
+function skipRound(){
+  fetch("/skipround", {
+    method: "GET"
+  })
+}
+
 fieldsProps.forEach(field => {
   new boardField(field[0], field[1], field[2], field[3], field[4])
 })
 
 function rollTheDice() {
-  if (canimove) {
     fetch("/rollTheDice", {
       method: "GET"
     }).then(res => res.json()).then(res => {
+      console.log("back")
       document.getElementById("dice").removeAttribute("onclick")
-      if (res.num) {
-        moveDist = res.num
+      console.log(res.movablePawns)
+      //if (res.movablePawns && res.num && res.playerID) {
         document.getElementById("diceValue").src = "./img/dice/dice" + res.num + ".png"
         let voices = [new SpeechSynthesisUtterance("jeden"), new SpeechSynthesisUtterance("dwa"), new SpeechSynthesisUtterance("trzy"), new SpeechSynthesisUtterance("cztery"), new SpeechSynthesisUtterance("pięć"), new SpeechSynthesisUtterance("sześć")]
         speechSynthesis.speak(voices[res.num - 1])
-        if (allInDock) {
-          if (res.num != 1 && res.num != 6) {
-            fetch("/skipround", {
-              method: "GET"
-            })
-          }
+        if(res.movablePawns.filter(pawn => pawn == null).length == 4){
+          console.log("skip")
+          skipRound()
+        }else{
+          console.log("dodawanie listenerow")
+          res.movablePawns.forEach(pawn => {
+            if(pawn != null){
+              switch(colorIndexes[res.playerID]){
+                case "red":
+                  target = fieldsArr.find(field => field.redId == pawn)
+                  break;
+                case "yellow":
+                  target = fieldsArr.find(field => field.yellowId == pawn)
+                  break;
+                case "green":
+                  target = fieldsArr.find(field => field.greenId == pawn)
+                  break;
+                case "blue":
+                  target = fieldsArr.find(field => field.blueId == pawn)
+                  break;
+              }
+              target.addClic()
+              console.log(target.mainField)
+            }
+          })
         }
-      }
+      //}
     })
-  }
 }
 
 function startFromDock() {
@@ -398,41 +392,66 @@ function startFromDock() {
   }
 }
 
-function movePawn() {
-  this.removeEventListener("click", movePawn)
-  let obj = fieldsArr[parseInt(this.getAttribute("idx"))]
-  let target
-  let v
-  switch (mycolor) {
-    case "red":
-      target = fieldsArr.find(field => field.redId == obj.redId + moveDist)
-      v = obj.redId + moveDist
-      target.changeColor("red")
-      break
-    case "yellow":
-      target = fieldsArr.find(field => field.yellowId == obj.yellowId + moveDist)
-      v = obj.yellowId + moveDist
-      target.changeColor("yellow")
-      break
-    case "green":
-      target = fieldsArr.find(field => field.greenId == obj.greenId + moveDist)
-      v = obj.greenId + moveDist
-      target.changeColor("green")
-      break
-    case "blue":
-      target = fieldsArr.find(field => field.blueId == obj.blueId + moveDist)
-      v = obj.blueId + moveDist
-      target.changeColor("blue")
-      break
-  }
-  fieldsArr[parseInt(this.getAttribute("idx"))].restoreBg()
-  target.mainField.addEventListener("click", movePawn)
+function movePawn(){
+  let tempPawnPos
+  fieldsArr.forEach(field => {
+    if(field.clickable){
+      field.removeClic()
+    }
+    if(field.mainField == this){
+      fetch("/getColor", {method: "GET"}).then(res => res.json()).then(res => {
+        switch(colorIndexes[res.color]){
+          case "red":
+            tempPawnPos = field.redId
+            break;
+          case "yellow":
+            tempPawnPos = field.yellowId
+            break;
+          case "green":
+            tempPawnPos = field.greenId
+            break;
+          case "blue":
+            tempPawnPos = field.blueId
+            break;
+        }
+        fetch("/movePawn", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({pawnToMove: tempPawnPos})
+        }).then(res => res.json()).then(res => {
+          updateBoard(res.room)
+          skipRound()
+        })
+      })
+    }
+  })
+}
 
-  fetch("/updatePawns", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ color: mycolor, id: parseInt(this.getAttribute("pawnID")), value: v })
-  }).then(console.log("Poszło"))
+function updateBoard(instructions){
+  fieldsArr.forEach(field => {
+    field.restoreBg()
+  })
+
+  instructions.pawns.forEach((group, color) => {
+    group.forEach(pawn => {
+      let target
+      switch(colorIndexes[color]){
+        case "red":
+          target = fieldsArr.find(field => field.redId == pawn)
+          break;
+        case "yellow":
+          target = fieldsArr.find(field => field.yellowId == pawn)
+          break;
+        case "green":
+          target = fieldsArr.find(field => field.greenId == pawn)
+          break;
+        case "blue":
+          target = fieldsArr.find(field => field.blueId == pawn)
+          break;
+      }
+      target.changeColor(colorIndexes[color])
+    })
+  })
 }

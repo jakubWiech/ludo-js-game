@@ -1,8 +1,9 @@
-module.exports.findRoom = function (id, playerId, playerName, roomArray, session) {
-    let respRoom = roomArray.find(room => room.id == id)
+module.exports.findRoom = function (roomArray, session, mode, move = 0, pawnToMove = 0) {
+    let respRoom = roomArray.find(room => room.id == session.roomID)
     respRoom.renewRoomExpire()
     let movable = false
-    let playerState = respRoom.players.find(player => player.id == playerId && player.name == playerName)
+    let colors = ["red", "yellow", "green", "blue"]
+    let requestingPlayer = respRoom.players.find(player => player.id == session.playerID && player.name == session.playerName)
     if (!respRoom.gameRunning) {
         let readyPlayers = 0
         respRoom.players.forEach(player => {
@@ -14,7 +15,7 @@ module.exports.findRoom = function (id, playerId, playerName, roomArray, session
             respRoom.startGame()
         }
     } else {
-        if (playerState == respRoom.currentPlayer) {
+        if (requestingPlayer == respRoom.players[respRoom.currentPlayer]) {
             movable = true;
             session.movable = true;
         } else {
@@ -24,11 +25,44 @@ module.exports.findRoom = function (id, playerId, playerName, roomArray, session
     }
 
     if (!session.color && respRoom.gameRunning) {
-        let colors = ["red", "yellow", "green", "blue"]
-        session.color = colors[respRoom.players.indexOf(playerState)]
+        session.color = colors[respRoom.players.indexOf(requestingPlayer)]
     }
 
-    playerState = playerState.ready
+    let winner = respRoom.ludoGame.checkWin()
+    if(winner != null){
+        winner = respRoom.players[winner]
+    }
 
-    return ({ room: { players: respRoom.players, gameStatus: respRoom.gameRunning, whosMove: respRoom.currentPlayer, moveTime: respRoom.moveTime, pawns: respRoom.pawns }, myColor: session.color, isItMyMove: movable, ready: playerState })
+    switch(mode){
+        case "fetch":
+            return ({ 
+                room: { 
+                    players: respRoom.players, 
+                    gameStatus: respRoom.gameRunning, 
+                    whosMove: respRoom.players[respRoom.currentPlayer], 
+                    moveTime: respRoom.moveTime, pawns: respRoom.ludoGame.getPawnsArray() 
+                }, 
+                myColor: session.color, 
+                isItMyMove: movable,
+                ready: requestingPlayer.ready,
+                winner: winner
+            })
+        case "rolldice":
+            return ({
+                pawns: respRoom.ludoGame.outputMovablePawns(session.playerID, move)
+            })
+        case "move":
+            respRoom.ludoGame.updatePawns(colors[session.playerID], pawnToMove, move)
+            return ({ 
+                room: { 
+                    players: respRoom.players, 
+                    gameStatus: respRoom.gameRunning, 
+                    whosMove: respRoom.players[respRoom.currentPlayer], 
+                    moveTime: respRoom.moveTime, pawns: respRoom.ludoGame.getPawnsArray() 
+                }, 
+                myColor: session.color, 
+                isItMyMove: movable, ready: 
+                requestingPlayer.ready 
+            })
+    }
 }

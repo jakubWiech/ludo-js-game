@@ -70,7 +70,7 @@ app.get("/game", function (req, res) {
 app.post("/connectToGame", function (req, res) {
   newUser(req.body.nickname);
   handleUser(req.body.nickname, roomArray, req.session);
-  res.end()
+  res.end(JSON.stringify({id: req.session.playerID}))
 });
 
 app.post("/updatePawns", function (req, res) {
@@ -105,7 +105,7 @@ app.get("/destroySession", function (req, res) {
 
 app.get("/findRoom", function (req, res) {
   if (req.session.roomID) {
-    let neededResp = findRoom(req.session.roomID, req.session.playerID, req.session.playerName, roomArray, req.session);
+    let neededResp = findRoom(roomArray, req.session, "fetch");
     res.end(JSON.stringify(neededResp));
   } else {
     res.end()
@@ -113,18 +113,44 @@ app.get("/findRoom", function (req, res) {
 });
 
 app.get("/rollTheDice", function (req, res) {
-  if (req.session.movable) {
-    let randomNumber = { num: Math.floor(Math.random() * 6) + 1 }
-    res.end(JSON.stringify(randomNumber))
+  if (req.session.movable && !req.session.afterDiceRoll) {
+    let resp = { num: Math.floor(Math.random() * 6) + 1}
+    resp.movablePawns = findRoom(roomArray, req.session, "rolldice", resp.num).pawns
+    resp.playerID = req.session.playerID
+    //let result = game.outputMovablePawns(game.colorIndexes[req.session.playerID], resp.num)
+    console.log(resp.movablePawns)
+    req.session.afterDiceRoll = true
+    req.session.diceOutput = resp.num
+    res.end(JSON.stringify(resp))
   } else {
     res.end()
   }
 })
 
 app.get("/skipround", function (req, res) {
-  let target = roomArray.find(room => room.id == req.session.roomID)
-  target.skipRound()
+  if(req.session.movable){
+    req.session.afterDiceRoll = false
+    let target = roomArray.find(room => room.id == req.session.roomID)
+    target.skipRound()
+  }
   res.end()
+})
+
+app.get("/getColor", function(req, res){
+  if(req.session.movable){
+    res.end(JSON.stringify({color: req.session.playerID}))
+  }
+})
+
+app.post("/movePawn", function (req, res) {
+  if(req.session.movable && req.session.afterDiceRoll){
+    req.session.afterDiceRoll = false
+    console.log(req.body.pawnToMove)
+    let resp = findRoom(roomArray, req.session, "move", req.session.diceOutput, req.body.pawnToMove)
+    res.end(JSON.stringify(resp))
+  }else{
+    res.end()
+  }
 })
 
 app.listen(port, function () {

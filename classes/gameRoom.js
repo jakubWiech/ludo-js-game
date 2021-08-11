@@ -1,3 +1,5 @@
+const ludoGame = require("../components/ludoGame.js").mainGame;
+
 const session = require('express-session')
 const uniqid = require('uniqid')
 class gameRoom {
@@ -8,8 +10,9 @@ class gameRoom {
         this.roomExpires = 300
         this.allRooms = roomArray
         this.expirement = setInterval(this.checkRoom.bind(this), 1000)
-        this.currentPlayer = ""
+        this.currentPlayer = 0
         this.moveTime = 30
+        this.ludoGame = new ludoGame
     }
 
     addPlayer = function (nickname) {
@@ -42,25 +45,15 @@ class gameRoom {
 
     startGame = function () {
         this.gameRunning = true
-        this.setupPawns()
         this.amountPlayers = this.players.length
         this.round = 0
-        this.currentPlayer = this.players[this.round % this.amountPlayers]
+        this.currentPlayer = this.round % this.amountPlayers
     }
 
     skipRound = function () {
         this.round++
-        this.currentPlayer = this.players[this.round % this.amountPlayers]
+        this.currentPlayer = this.round % this.amountPlayers
         this.moveTime = 30
-    }
-
-    setupPawns = function () {
-        this.pawns = {
-            red: [-1, -2, -3, -4],
-            yellow: [-1, -2, -3, -4],
-            green: [-1, -2, -3, -4],
-            blue: [-1, -2, -3, -4],
-        }
     }
 }
 
