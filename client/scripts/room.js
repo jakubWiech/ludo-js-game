@@ -128,6 +128,7 @@ class boardField {
     this.mainField.style.borderRadius = "50%"
     this.mainField.setAttribute("class", "shadow")
     this.clickable = false
+    //this.fieldAfterMove = this
     if(typeof(id) == "object"){
       this.redId = id[0]
       this.yellowId = id[1]
@@ -195,14 +196,56 @@ class boardField {
     this.mainField.style.backgroundColor = this.bg
   }
 
-  addClic = function () {
+  addClic = () => {
     this.mainField.addEventListener("click", movePawn)
+    this.mainField.addEventListener("mouseover", this.highlightOtherField)
+    this.mainField.addEventListener("mouseout", this.normalizeOtherField)
     this.clickable = true
   }
 
-  removeClic = function () {
+  removeClic = () => {
     this.mainField.removeEventListener("click", movePawn)
+    this.mainField.removeEventListener("mouseover", this.highlightOtherField)
+    this.mainField.removeEventListener("mouseout", this.normalizeOtherField)
     this.clickable = false
+  }
+
+  highlightField = function (){
+    this.normalizeField()
+    this.hoverDiv = document.createElement("div")
+    this.hoverDiv.style.width = "100%"
+    this.hoverDiv.style.height = "100%"
+    this.hoverDiv.style.borderRadius = "50%"
+    this.hoverDiv.style.backgroundColor = "white"
+    this.hoverDiv.style.opacity = 0.3
+    this.hoverDiv.style.zIndex = 2
+    console.log("append", this.hoverDiv)
+    this.mainField.appendChild(this.hoverDiv)
+  }
+
+  highlightOtherField = () => {
+    if(this.nextField != null){
+      console.log("dziala")
+      this.nextField.highlightField()
+    }
+  }
+
+  normalizeField = function(){
+    this.mainField.innerHTML = ""
+  }
+
+  normalizeOtherField = () => {
+    if(this.nextField != null){
+      this.nextField.normalizeField()
+    }
+  }
+
+  set nextField(targetToHighlight){
+    this.fieldAfterMove = targetToHighlight
+  }
+
+  get nextField(){
+    return this.fieldAfterMove
   }
 }
 
@@ -333,23 +376,45 @@ function rollTheDice() {
         }else{
           console.log("dodawanie listenerow")
           res.movablePawns.forEach(pawn => {
+            let target, targetToHighlight, indexx
+            console.log(res.num)
             if(pawn != null){
               switch(colorIndexes[res.playerID]){
                 case "red":
                   target = fieldsArr.find(field => field.redId == pawn)
+                  if(pawn < 0){
+                    targetToHighlight = fieldsArr.find(field => field.redId == 0)
+                  } else {
+                    targetToHighlight = fieldsArr.find(field => field.redId == pawn + res.num)
+                  }
                   break;
                 case "yellow":
                   target = fieldsArr.find(field => field.yellowId == pawn)
+                  if(pawn < 0){
+                    targetToHighlight = fieldsArr.find(field => field.yellowId == 0)
+                  }else{
+                    targetToHighlight = fieldsArr.find(field => field.yellowId == pawn + res.num)
+                  }
                   break;
                 case "green":
                   target = fieldsArr.find(field => field.greenId == pawn)
+                  if(pawn < 0){
+                    targetToHighlight = fieldsArr.find(field => field.greenId == 0)
+                  }else{
+                    targetToHighlight = fieldsArr.find(field => field.greenId == pawn + res.num)
+                  }
                   break;
                 case "blue":
                   target = fieldsArr.find(field => field.blueId == pawn)
+                  if(pawn < 0){
+                    targetToHighlight = fieldsArr.find(field => field.blueId == 0)
+                  }else{
+                    targetToHighlight = fieldsArr.find(field => field.blueId == pawn + res.num)
+                  }
                   break;
               }
+              target.nextField = targetToHighlight
               target.addClic()
-              console.log(target.mainField)
             }
           })
         }
@@ -357,46 +422,47 @@ function rollTheDice() {
     })
 }
 
-function startFromDock() {
-  if (moveDist == 1 || moveDist == 6) {
-    this.removeEventListener("click", startFromDock)
-    let target
-    switch (mycolor) {
-      case "red":
-        target = fieldsArr.find(field => field.redId == 0)
-        target.changeColor("red")
-        break
-      case "yellow":
-        target = fieldsArr.find(field => field.yellowId == 0)
-        target.changeColor("yellow")
-        break
-      case "green":
-        target = fieldsArr.find(field => field.greenId == 0)
-        target.changeColor("green")
-        break
-      case "blue":
-        target = fieldsArr.find(field => field.blueId == 0)
-        target.changeColor("blue")
-        break
-    }
-    fieldsArr[parseInt(this.getAttribute("idx"))].restoreBg()
-    target.mainField.addEventListener("click", movePawn)
+// function startFromDock() {
+//   if (moveDist == 1 || moveDist == 6) {
+//     this.removeEventListener("click", startFromDock)
+//     let target
+//     switch (mycolor) {
+//       case "red":
+//         target = fieldsArr.find(field => field.redId == 0)
+//         target.changeColor("red")
+//         break
+//       case "yellow":
+//         target = fieldsArr.find(field => field.yellowId == 0)
+//         target.changeColor("yellow")
+//         break
+//       case "green":
+//         target = fieldsArr.find(field => field.greenId == 0)
+//         target.changeColor("green")
+//         break
+//       case "blue":
+//         target = fieldsArr.find(field => field.blueId == 0)
+//         target.changeColor("blue")
+//         break
+//     }
+//     fieldsArr[parseInt(this.getAttribute("idx"))].restoreBg()
+//     target.mainField.addEventListener("click", movePawn)
 
-    fetch("/updatePawns", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ color: mycolor, id: parseInt(this.getAttribute("pawnID")), value: 0 })
-    }).then(console.log("Poszło"))
-  }
-}
+//     fetch("/updatePawns", {
+//       method: "POST",
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ color: mycolor, id: parseInt(this.getAttribute("pawnID")), value: 0 })
+//     }).then(console.log("Poszło"))
+//   }
+// }
 
 function movePawn(){
   let tempPawnPos
   fieldsArr.forEach(field => {
     if(field.clickable){
       field.removeClic()
+      field.nextField.normalizeField()
     }
     if(field.mainField == this){
       fetch("/getColor", {method: "GET"}).then(res => res.json()).then(res => {

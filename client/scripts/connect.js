@@ -10,3 +10,8 @@ function connectToGame() {
         }).then(console.log("wyslano")).then(res => location.href = "/game")
     }
 }
+document.addEventListener("keydown", function(e){
+    if(e.key == "Enter"){
+        connectToGame()
+    }
+})
